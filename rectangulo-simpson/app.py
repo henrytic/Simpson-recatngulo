@@ -31,14 +31,19 @@ def simpson_rule(func, a, b, n):
 
     # Preparación del gráfico
     fig, ax = plt.subplots()
-    x_smooth = np.linspace(a, b, 300)
-    y_smooth = f(x_smooth)
-    ax.plot(x_smooth, y_smooth, label='Función f(x)')
 
+    # Dibujar las áreas de aproximación de Simpson primero
+    area_color = '#2ca02c'  # Verde
+    area_alpha = 0.5  # Semi-transparencia
     for i in range(0, n, 2):
         xs = np.linspace(x_vals[i], x_vals[i + 2], 100)
         ys = f(xs)
-        ax.fill_between(xs, ys, color='gray', alpha=0.3)
+        ax.fill_between(xs, ys, color=area_color, alpha=area_alpha)
+
+    # Luego dibujar la función
+    x_smooth = np.linspace(a, b, 300)
+    y_smooth = f(x_smooth)
+    ax.plot(x_smooth, y_smooth, label='Función f(x)', color='blue', linewidth=2)
 
     ax.set_title('Aproximación de la Integral usando el Método de Simpson')
     ax.set_xlabel('x')
@@ -49,6 +54,8 @@ def simpson_rule(func, a, b, n):
     plt.close()
 
     return integral, plot_url
+
+#---------------------------------------
 
 def metodo_rectangulo(func, a, b, n, metodo):
     """Método del Rectángulo para integrar 'func' desde 'a' hasta 'b' con 'n' subintervalos"""
@@ -69,23 +76,29 @@ def metodo_rectangulo(func, a, b, n, metodo):
 
     # Preparación del gráfico
     fig, ax = plt.subplots()
-    x_smooth = np.linspace(a, b, 300)
-    y_smooth = f(x_smooth)
-    ax.plot(x_smooth, y_smooth, label='Función f(x)')
-
+    
+    # Primero dibujar los rectángulos
     for i in range(n):
         if metodo == 'izquierdo':
-            xs = [x_vals[i], x_vals[i], x_vals[i+1], x_vals[i+1]]
+            rect_x = x_vals[i]
         elif metodo == 'derecho':
-            xs = [x_vals[i+1], x_vals[i+1], x_vals[i], x_vals[i]]
+            rect_x = x_vals[i+1]
         elif metodo == 'punto_medio':
-            mid = (x_vals[i] + x_vals[i+1]) / 2
-            xs = [mid, mid, x_vals[i], x_vals[i+1]]
+            rect_x = (x_vals[i] + x_vals[i+1]) / 2
+            rect_width = dx
+        else:
+            raise ValueError("Método desconocido")
 
-        ys = [0, f(xs[1]), f(xs[2]), 0]
-        ax.fill(xs, ys, 'b', edgecolor='b', alpha=0.3)
+        rect_height = f(rect_x)
+        rect = plt.Rectangle((x_vals[i], 0), dx, rect_height, color='orange', alpha=0.5)
+        ax.add_patch(rect)
 
-    ax.set_title(f'Aproximación de la Integral usando el Método del Rectángulo ({metodo})')
+    # Luego dibujar la función
+    x_smooth = np.linspace(a, b, 300)
+    y_smooth = f(x_smooth)
+    ax.plot(x_smooth, y_smooth, label='Función f(x)', color='blue')
+
+    ax.set_title(f'Aproximación de la Integral usando el Método del Rectángulo ({metodo.title()})')
     ax.set_xlabel('x')
     ax.set_ylabel('f(x)')
     ax.legend()
@@ -94,6 +107,8 @@ def metodo_rectangulo(func, a, b, n, metodo):
     plt.close()
 
     return integral, plot_url
+
+
 
 @app.route('/')
 def home():
