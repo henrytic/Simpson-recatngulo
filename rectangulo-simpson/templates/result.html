@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de la Integral</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Resultado de la Integral</h2>
+        <p class="lead">Resultado: {{ result }}</p>
+        <div class="text-center">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de la Función" class="img-fluid">
+        </div>
+        <a href="/" class="btn btn-secondary mt-3">Volver</a>
+    </div>
+</body>
+</html>

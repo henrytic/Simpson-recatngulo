@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método de los Rectángulos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Método de los Rectángulos</h2>
+        <form action="/rectangulos" method="post">
+            <div class="form-group">
+                <label for="function">Función f(x):</label>
+                <input type="text" class="form-control" id="function" name="function" required>
+            </div>
+            <div class="form-group">
+                <label for="a">Límite inferior (a):</label>
+                <input type="number" class="form-control" id="a" name="a" required>
+            </div>
+            <div class="form-group">
+                <label for="b">Límite superior (b):</label>
+                <input type="number" class="form-control" id="b" name="b" required>
+            </div>
+            <div class="form-group">
+                <label for="n">Número de subintervalos (n):</label>
+                <input type="number" class="form-control" id="n" name="n" required>
+            </div>
+            <div class="form-group">
+                <label for="metodo">Tipo de rectángulo:</label>
+                <select class="form-control" id="metodo" name="metodo">
+                    <option value="izquierdo">Izquierdo</option>
+                    <option value="derecho">Derecho</option>
+                    <option value="punto_medio">Punto Medio</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+    </div>
+</body>
+</html>
